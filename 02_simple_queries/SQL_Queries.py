@@ -22,3 +22,8 @@ def insert_data_products(name):
                 (4, 'Monitor', 350),
                 (5, 'Printer', 150)"""
     return COMMAND
+
+def get_data(name):
+    COMMAND = fr"""SELECT ProductID, ProductName, Price
+                    FROM {name};"""
+    return COMMAND

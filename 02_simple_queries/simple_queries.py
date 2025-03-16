@@ -66,5 +66,24 @@ except pyodbc.IntegrityError as IEex:
     print(IEex)
 else:
     print(f'Data in {table_name} inserted!!')
+# finally:
+#     conn.close()
+
+data_list = []
+
+try:
+    SQL_QUERY = SQL_Queries.get_data(table_name)
+    cursor.execute(f'USE {WORK_DATABASE}')
+    result = cursor.execute(SQL_QUERY)
+except pyodbc.Error as ex:
+    print(ex)
+else:
+    records = result.fetchall()
+    for record in records:
+        data_dict = {'ID': record.ProductID, 'name':record.ProductName, 'price': float(record.Price)}
+        data_list.append(data_dict)
 finally:
     conn.close()
+
+print(data_list)
+[print(data) for data in data_list]
