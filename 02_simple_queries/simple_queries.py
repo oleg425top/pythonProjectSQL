@@ -1,4 +1,5 @@
 import os
+import json
 
 from dotenv import load_dotenv
 import pyodbc
@@ -16,18 +17,19 @@ PASSWORD = os.getenv('MS_SQL_KEY')
 
 """Простое подключение"""
 
-connection_string = f'''DRIVER={{SQL Server}};
-                SERVER={SERVER};
-                DATABASE={PAD_DATABASE};
-                Trusted_Connection=yes'''
+# connection_string = f'''DRIVER={{SQL Server}};
+#                 SERVER={SERVER};
+#                 DATABASE={PAD_DATABASE};
+#                 Trusted_Connection=yes'''
 
 """Надежное соединение"""
 
-# connection_string = f'''DRIVER={DRIVER};
-#                 SERVER={SERVER};
-#                 DATABASE={PAD_DATABASE};
-#                 UID={USER};
-#                 PWD={PASSWORD}'''
+connection_string = f'''DRIVER={DRIVER};
+                SERVER={SERVER};
+                DATABASE={PAD_DATABASE};
+                UID={USER};
+                PWD={PASSWORD};
+                Trusted_Connection=yes'''
 
 conn = pyodbc.connect(connection_string)
 conn.autocommit = True
@@ -87,3 +89,7 @@ finally:
 
 print(data_list)
 [print(data) for data in data_list]
+
+with open('data_products.json', 'w', encoding='utf-8') as fp:
+    json.dump(data_list, fp, ensure_ascii=False, indent=4)
+    print('Data added to json file')
