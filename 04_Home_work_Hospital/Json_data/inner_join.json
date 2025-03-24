@@ -1,0 +1,47 @@
+[
+    {
+        "Surname": "Иванов",
+        "Name": "Иван",
+        "DepartmentName": "Кардиология"
+    },
+    {
+        "Surname": "Петров",
+        "Name": "Петр",
+        "DepartmentName": "Кардиология"
+    },
+    {
+        "Surname": "Сидоров",
+        "Name": "Сидор",
+        "DepartmentName": "Неврология"
+    },
+    {
+        "Surname": "Кузнецова",
+        "Name": "Ольга",
+        "DepartmentName": "Неврология"
+    },
+    {
+        "Surname": "Смирнова",
+        "Name": "Дарья",
+        "DepartmentName": "Педиатрия"
+    },
+    {
+        "Surname": "Васильев",
+        "Name": "Василий",
+        "DepartmentName": "Педиатрия"
+    },
+    {
+        "Surname": "Попов",
+        "Name": "Евгений",
+        "DepartmentName": "Хирургия"
+    },
+    {
+        "Surname": "Лебедева",
+        "Name": "Виктория",
+        "DepartmentName": "Кардиология"
+    },
+    {
+        "Surname": "Козлова",
+        "Name": "Надежда",
+        "DepartmentName": "Педиатрия"
+    }
+]
