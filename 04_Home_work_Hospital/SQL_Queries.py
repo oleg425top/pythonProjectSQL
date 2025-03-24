@@ -1,4 +1,4 @@
-import json
+"""Универсальный запрос для создания любой таблицы"""
 
 
 def create_table(table_name):
@@ -186,7 +186,10 @@ def left_join():
     #     json.dump(join_dict, f, ensure_ascii=False, indent=4)
     return QUERY
 
+
 """RIGHT JOIN. список всех врачей и их отделов, включая врачей без отделов."""
+
+
 def right_join():
     QUERY = f"""SELECT Doctors.Surname, Doctors.Name, Departments.DepartmentName
                 FROM Doctors

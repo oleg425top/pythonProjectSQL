@@ -4,8 +4,6 @@ import json
 import pyodbc
 from dotenv import load_dotenv
 
-from sql_query import sql_query
-
 import SQL_Queries
 
 
@@ -35,18 +33,6 @@ class MSSQLOperator:
     def __init__(self, conn_obj):
         self.conn = conn_obj
         self.conn_cursor = self.conn.cursor()
-
-    # def create_database_params(self, database_name, size='8', maxsize='16', filegrowth='10%'):
-    #     SQLCommand = SQL_Queries.create_database(database_name, size, maxsize, filegrowth)
-    #     try:
-    #         self.conn.execute(SQLCommand)
-    #     except pyodbc.ProgrammingError as ex:
-    #         print(ex)
-    #
-    #         return False
-    #     else:
-    #
-    #         print(f'База данных {database_name} успешно создана')
 
     def create_table(self, database_name, sql_query, table_name=None, references_table=None, references_column=None):
         self.conn_cursor.execute(f'USE {database_name}')
@@ -164,7 +150,7 @@ class MSSQLOperator:
         else:
             records = result.fetchall()
             for record in records:
-                data_dict = {'Surname': record.Surname, 'Name':record.Name}
+                data_dict = {'Surname': record.Surname, 'Name': record.Name}
                 data_list.append(data_dict)
             print(data_list)
             with open('Json_data/some_query.json', 'w', encoding='utf-8') as fp:
@@ -184,7 +170,7 @@ class MSSQLOperator:
         else:
             records = result.fetchall()
             for record in records:
-                data_dict = {'Surname': record.Surname, 'Name':record.Name}
+                data_dict = {'Surname': record.Surname, 'Name': record.Name}
                 data_list.append(data_dict)
             print(data_list)
             with open('Json_data/all_query.json', 'w', encoding='utf-8') as fp:
@@ -204,7 +190,7 @@ class MSSQLOperator:
         else:
             records = result.fetchall()
             for record in records:
-                data_dict = {'Surname': record.Surname, 'Name':record.Name}
+                data_dict = {'Surname': record.Surname, 'Name': record.Name}
                 data_list.append(data_dict)
             print(data_list)
             with open('Json_data/any_some_all_query.json', 'w', encoding='utf-8') as fp:
@@ -224,7 +210,7 @@ class MSSQLOperator:
         else:
             records = result.fetchall()
             for record in records:
-                data_dict = {'Surname': record.Surname, 'Name':record.Name}
+                data_dict = {'Surname': record.Surname, 'Name': record.Name}
                 data_list.append(data_dict)
             print(data_list)
             with open('Json_data/union_query.json', 'w', encoding='utf-8') as fp:
@@ -244,7 +230,7 @@ class MSSQLOperator:
         else:
             records = result.fetchall()
             for record in records:
-                data_dict = {'Surname': record.Surname, 'Name':record.Name}
+                data_dict = {'Surname': record.Surname, 'Name': record.Name}
                 data_list.append(data_dict)
             print(data_list)
             with open('Json_data/union_all_query.json', 'w', encoding='utf-8') as fp:
@@ -264,7 +250,7 @@ class MSSQLOperator:
         else:
             records = result.fetchall()
             for record in records:
-                data_dict = {'Surname': record.Surname, 'Name':record.Name, 'DepartmentName':record.DepartmentName}
+                data_dict = {'Surname': record.Surname, 'Name': record.Name, 'DepartmentName': record.DepartmentName}
                 data_list.append(data_dict)
             print(data_list)
             with open('Json_data/inner_join.json', 'w', encoding='utf-8') as fp:
@@ -284,7 +270,7 @@ class MSSQLOperator:
         else:
             records = result.fetchall()
             for record in records:
-                data_dict = {'Surname': record.Surname, 'Name':record.Name, 'DepartmentName':record.DepartmentName}
+                data_dict = {'Surname': record.Surname, 'Name': record.Name, 'DepartmentName': record.DepartmentName}
                 data_list.append(data_dict)
             print(data_list)
             with open('Json_data/left_join.json', 'w', encoding='utf-8') as fp:
@@ -304,7 +290,7 @@ class MSSQLOperator:
         else:
             records = result.fetchall()
             for record in records:
-                data_dict = {'Surname': record.Surname, 'Name':record.Name, 'DepartmentName':record.DepartmentName}
+                data_dict = {'Surname': record.Surname, 'Name': record.Name, 'DepartmentName': record.DepartmentName}
                 data_list.append(data_dict)
             print(data_list)
             with open('Json_data/right_join.json', 'w', encoding='utf-8') as fp:
@@ -313,15 +299,13 @@ class MSSQLOperator:
             return True
 
 
-
-
 if __name__ == '__main__':
     load_dotenv()
 
     DRIVER = os.getenv('MS_SQL_DRIVER')
     SERVER = os.getenv('MS_SQL_SERVER')
     WORK_DATABASE = "Hospital"
-    # PAD_DATABASE = os.getenv('MS_PAD_DATABASE')
+    PAD_DATABASE = os.getenv('MS_PAD_DATABASE') #в данном примере не используется!!
     USER = os.getenv('MS_SQL_USER')
     PASSWORD = os.getenv('MS_SQL_KEY')
 
@@ -329,12 +313,12 @@ if __name__ == '__main__':
                                          database=WORK_DATABASE)
 
     my_db_operator = MSSQLOperator(conn)
-    # table_name = input('Ведите название таблицы')
-    # my_db_operator.create_table(WORK_DATABASE, SQL_Queries.create_table, table_name)
-    # my_db_operator.drop_table(WORK_DATABASE, SQL_Queries.drop_table, table_name)
+    table_name = input('Ведите название таблицы')
+    my_db_operator.create_table(WORK_DATABASE, SQL_Queries.create_table, table_name)
+    my_db_operator.drop_table(WORK_DATABASE, SQL_Queries.drop_table, table_name)
     my_db_operator.first_exists_query(WORK_DATABASE, SQL_Queries.first_exists_query)
     print()
-    # my_db_operator.get_data_from_any_table(WORK_DATABASE, SQL_Queries.universal_query)
+    my_db_operator.get_data_from_any_table(WORK_DATABASE, SQL_Queries.universal_query)
     my_db_operator.second_exists_query(WORK_DATABASE, SQL_Queries.second_exists_query)
     my_db_operator.any_query(WORK_DATABASE, SQL_Queries.any_query)
     print()
